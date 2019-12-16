@@ -35,7 +35,7 @@ public class TicketSeller4 {
 		for(int i=0; i<10; i++) {
 			new Thread(()->{
 				while(true) {
-					String s = tickets.poll();
+					String s = tickets.poll();//如果没拿到就会返回空 null
 					if(s == null) break;
 					else System.out.println("销售了--" + s);
 				}

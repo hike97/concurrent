@@ -28,7 +28,7 @@ public class TicketSeller2 {
 		for(int i=0; i<10; i++) {
 			new Thread(()->{
 				while(tickets.size() > 0) {
-					
+					/*判断和操作分离*/
 					try {
 						TimeUnit.MILLISECONDS.sleep(10);
 					} catch (InterruptedException e) {

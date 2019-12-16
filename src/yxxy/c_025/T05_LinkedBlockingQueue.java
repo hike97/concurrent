@@ -11,6 +11,10 @@ public class T05_LinkedBlockingQueue {
 
 	static Random r = new Random();
 
+	/**
+	 * 用阻塞式的queue 来实现阻塞式生产者消费者模式 无界队列
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		new Thread(() -> {
 			for (int i = 0; i < 100; i++) {

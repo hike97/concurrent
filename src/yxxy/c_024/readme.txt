@@ -1,14 +1,14 @@
-Í¬²½ÈİÆ÷Àà
+åŒæ­¥å®¹å™¨ç±»
 
-1£ºVector Hashtable £ºÔçÆÚÊ¹ÓÃsynchronizedÊµÏÖ 
-2£ºArrayList HashSet £ºÎ´¿¼ÂÇ¶àÏß³Ì°²È«£¨Î´ÊµÏÖÍ¬²½£©
-3£ºHashSet vs Hashtable StringBuilder vs StringBuffer
-4£ºCollections.synchronized***¹¤³§·½·¨Ê¹ÓÃµÄÒ²ÊÇsynchronized
+1ï¼šVector Hashtable ï¼šæ—©æœŸä½¿ç”¨synchronizedå®ç° 
+2ï¼šArrayList HashSet ï¼šæœªè€ƒè™‘å¤šçº¿ç¨‹å®‰å…¨ï¼ˆæœªå®ç°åŒæ­¥ï¼‰
+3ï¼šHashSet vs Hashtable StringBuilder vs StringBuffer
+4ï¼šCollections.synchronized***å·¥å‚æ–¹æ³•ä½¿ç”¨çš„ä¹Ÿæ˜¯synchronized
 
-Ê¹ÓÃÔçÆÚµÄÍ¬²½ÈİÆ÷ÒÔ¼°Collections.synchronized***·½·¨µÄ²»×ãÖ®´¦£¬ÇëÔÄ¶Á£º
+ä½¿ç”¨æ—©æœŸçš„åŒæ­¥å®¹å™¨ä»¥åŠCollections.synchronized***æ–¹æ³•çš„ä¸è¶³ä¹‹å¤„ï¼Œè¯·é˜…è¯»ï¼š
 http://blog.csdn.net/itm_hadf/article/details/7506529
 
-Ê¹ÓÃĞÂµÄ²¢·¢ÈİÆ÷
+ä½¿ç”¨æ–°çš„å¹¶å‘å®¹å™¨
 http://xuganggogo.iteye.com/blog/321630
 
-5£º
+5ï¼š

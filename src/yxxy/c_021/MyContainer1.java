@@ -18,7 +18,11 @@ public class MyContainer1<T> {
 	
 	
 	public synchronized void put(T t) {
-		while(lists.size() == MAX) { //想想为什么用while而不是用if？
+		while(lists.size() == MAX) {
+			//想想为什么用while而不是用if？
+			/*防止在wait到add的过程中，
+			  另外的线程进行add 这样就会发生数组越界，
+			  if只判断一次，while可循环多次判断 wait 99.9%的情况下会和while连用*/
 			try {
 				this.wait(); //effective java
 			} catch (InterruptedException e) {
@@ -29,6 +33,10 @@ public class MyContainer1<T> {
 		lists.add(t);
 		++count;
 		this.notifyAll(); //通知消费者线程进行消费
+		// 为什么用notifyAll ？
+		/**
+		 * 因为notify 可能只唤醒了 生产者 导致程序无法运行
+		 */
 	}
 	
 	public synchronized T get() {
