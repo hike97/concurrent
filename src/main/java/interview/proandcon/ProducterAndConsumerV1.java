@@ -12,41 +12,59 @@ import java.util.concurrent.*;
  **/
 public class ProducterAndConsumerV1 {
 	public static void main (String[] args) {
-		ThreadFactory namedThreadFactory = new ThreadFactoryBuilder ().setNameFormat("demo-pool-%d").build();
-		ExecutorService singleThreadPool = new ThreadPoolExecutor(1, 1,
-				0L, TimeUnit.MILLISECONDS,
-				new LinkedBlockingQueue<Runnable>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+//		ThreadFactory namedThreadFactory = new ThreadFactoryBuilder ().setNameFormat ("demo-pool-%d").build ();
+//		ExecutorService singleThreadPool = new ThreadPoolExecutor (5, 10,
+//				0L, TimeUnit.MILLISECONDS,
+//				new LinkedBlockingQueue<Runnable> (1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy ());
+
+//		while (true){
+//			singleThreadPool.execute (new ProductThread (man));
+//			singleThreadPool.execute (new ConsumerThread (man));
+//			singleThreadPool.execute (new ProductThread (man));
+//			singleThreadPool.execute (new ProductThread (man));
+//		}
+
+
+		//		proExecutor.shutdown ();
+		//		conExecutor.shutdown ();
+		SaleMan man = new SaleMan ();
+		ProductThread productThread = new ProductThread (man);
+		ConsumerThread consumerThread = new ConsumerThread (man);
+		for (int i = 0; i <10 ; i++) {
+			new Thread (productThread,"生产者").start ();
+			new Thread (consumerThread,"消费者").start ();
+		}
 
 
 
-//		proExecutor.shutdown ();
-//		conExecutor.shutdown ();
-//		new Thread (new ProductThread (saleMan),"生产者").start ();
-//		new Thread (new ConsumerThread (saleMan),"消费者").start ();
 
 	}
 }
+
 /**
  * 店员 共同资源
  * 消费者线程 和 生产者线程共同持有
  */
-class SaleMan{
+class SaleMan {
 	private int product;
-	public synchronized void getProduct() throws Exception{
-		while (product>0){
+
+	public synchronized void getProduct () throws Exception {
+		while (product > 0) {
 			this.wait ();
 		}
 		product++;
-		System.out.println (Thread.currentThread ().getName ()+" 生产了："+product+"个产品~");
+		System.out.println (Thread.currentThread ().getName () + " 生产：remain:" + product + "个产品~");
+		Thread.sleep (500);
 		this.notifyAll ();
 	}
 
-	public synchronized void saleProduct() throws Exception{
-		while (product<=0){
+	public synchronized void saleProduct () throws Exception {
+		while (product <= 0) {
 			this.wait ();
 		}
-		System.out.println (Thread.currentThread ().getName ()+" 卖出了："+product+"个产品~");
+		Thread.sleep (200);
 		product--;
+		System.out.println (Thread.currentThread ().getName () + " 卖出：remain:" + product + "个产品~");
 		this.notifyAll ();
 	}
 }
@@ -54,7 +72,7 @@ class SaleMan{
 /**
  * 生产者线程
  */
-class ProductThread implements Runnable{
+class ProductThread implements Runnable {
 
 	private SaleMan saleMan;
 
@@ -64,20 +82,18 @@ class ProductThread implements Runnable{
 
 	@Override
 	public void run () {
-		for (int i = 0; i < 10; i++) {
 			try {
 				saleMan.getProduct ();
 			} catch (Exception e) {
 				e.printStackTrace ();
 			}
 		}
-	}
 }
 
 /**
  * 消费者线程
  */
-class ConsumerThread implements Runnable{
+class ConsumerThread implements Runnable {
 
 	private SaleMan saleMan;
 
@@ -87,12 +103,10 @@ class ConsumerThread implements Runnable{
 
 	@Override
 	public void run () {
-		for (int i = 0; i < 10; i++) {
 			try {
 				saleMan.saleProduct ();
 			} catch (Exception e) {
 				e.printStackTrace ();
 			}
-		}
 	}
 }
